@@ -15,4 +15,5 @@ pub fn centralize(y: &[f64]) -> Vec<f64> {
     let n = y.len() as f64;
     let m = mean(y);
     y.iter().map(|value| value - m).collect()
+    
 }
