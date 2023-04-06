@@ -1,4 +1,3 @@
-
 use actix_web::{web, App, HttpServer};
 
 mod signals {
@@ -8,17 +7,23 @@ mod signals {
 
 mod routes {
     pub mod transform;
+    pub mod index;
 }
 
-use signals::transform::fft;
-use routes::transform::{route_transform_fft};
+
+use routes::transform::{test_fft, pipeline_to_frequency};
+use routes::index::{index};
+
+
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
-            .service(route_transform_fft)
+            .service(index)
+            .service(test_fft)
+            .service(pipeline_to_frequency)
 
     })
     .bind("127.0.0.1:8080")?
